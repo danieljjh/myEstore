@@ -17,6 +17,7 @@ db.define_table(
     Field('description_long','text'),
     Field('private_info','text'),
     Field('unit_price','double'),
+    Field('list_price','double'),
     Field('on_sale','boolean'),
     Field('rating','double'),
     Field('clicks','integer'),
@@ -25,14 +26,9 @@ db.define_table(
     Field('media_file','upload'),
     Field('rating','double'),
     Field('in_stock','integer'),
-    Field('discount_2x','double'),
-    Field('discount_3x','double'),
-    Field('discount_4x','double'),
-    Field('discount_5x','double'),
-    Field('discount_10x','double'),
-    Field('tax_rate','double',default=3.0),
-    Field('volume','list:integer',default=0.0),
-    Field('weight','double',default=0.0),
+    Field('discount_2x','double',default=0),
+    Field('discount_3x','double',default=0),
+    Field('discount_4x','double',default=0),
     format='%(name)s')
 
 db.define_table(
@@ -42,29 +38,23 @@ db.define_table(
     Field('code'),
     Field('description','text'),
     Field('quantity','integer'),
+    Field('qty_on_book','integer'),
+    Field('list_price','double'),
+    Field('best_price','double'),
+    Field('fire_date','date',required=True),
     Field('serial_codes','list:string'))
 
 db.define_table(
     'cart_order',
-    # Field('billing_to',requires=INE),
-    # Field('billing_address',requires=INE),
-    # Field('billing_city',requires=INE),
-    # Field('billing_zip',requires=INE),
-    # Field('billing_country',requires=INE),
-    # Field('billing_phone'),
-    Field('shipping_to',requires=INE),
+    Field('guest_name',requires=INE),
     Field('shipping_address',requires=INE),
-    Field('shipping_city',requires=INE),
-    Field('shipping_zip',requires=INE),
+    Field('leaving_city',requires=INE),
+    # Field('shipping_zip',requires=INE),
     # Field('shipping_country',requires=INE),
-    Field('shipping_phone'),
-    Field('shipping_instructions','text'),
-    Field('shipping_type',requires=IS_IN_SET(('USPS','UPS','FEDEX'))),
+    Field('guest_phone'),
+    Field('booking_instructions','text'),
     Field('total','double',readable=False,writable=False),
     Field('total_discount','double',readable=False,writable=False),
-    Field('total_tax','double',readable=False,writable=False),
-    Field('total_after_tax','double',readable=False,writable=False),
-    Field('total_with_shipping',readable=False,writable=False),
     Field('amount_due','double',readable=False,writable=False),
     Field('amount_paid','double',readable=False,writable=False,default=0.0),
     auth.signature)
@@ -91,7 +81,7 @@ db.define_table('invoice',
 db.define_table(
     'invoice_item',
     Field('invoice','reference invoice'),
-    Field('quantity','double',default=1),
+    Field('quantity','integer',default=1),
     # Field('inventory','reference inventory'),
     # Field('shipping','reference shipping'),
     db.product,
@@ -100,19 +90,11 @@ db.define_table(
 
 def price_cart():    
     total_pretax = 0.0
-    tax = 0.0
-    volume = [0, 0, 0]
-    weight = 0.0
     discount = 0.0
     for qty, product, inventory in session.cart.itervalues():
-        price = product.unit_price*qty
+        # price = product.unit_price*qty
+        price = inventory.best_price*qty
         n, d = qty, 0.0
-        if product.discount_10x:
-            d += product.discount_10x*int(n/10)
-            n -= 10*int(n/10)
-        if n and product.discount_5x:
-            d += product.discount_5x*int(n/5)
-            n -= 5*int(n/5) 
         if n and product.discount_4x:
             d += product.discount_4x*int(n/4)
             n -= 4*int(n/4) 
@@ -125,33 +107,9 @@ def price_cart():
         product.price = price
         total_pretax += price
         discount += d
-        tax += product.tax_rate*(price-d)/100
-        w = product.volume
-        if product.delivery=='normal':
-            if w and len(w)==3:
-                for k in range(qty):
-                    v = [x for x in volume or [0,0,0]]
-                    v.sort()
-                    volume = [v[0]+w[0],max(v[1],w[1]),max(v[2],w[2])]
-                    volume.sort()
-            if product.weight:
-                weight += qty*product.weight
-    if COMPANY_ADDRESS and session.checkout_form:        
-        address2 = '%(shipping_address)s %(shipping_city)s %(shipping_zip)s %(shipping_country)s' % session.checkout_form
-        shipping = compute_shipping(type, volume, weight, 
-                                    COMPANY_ADDRESS, address2)
-        total_with_shipping = total_pretax-discount+tax+shipping
-    else:
-        shipping = None
-        total_with_shipping = None
     return dict(
         total = total_pretax,
-        total_discount = discount,
-        total_tax = tax, 
-        total_with_tax = total_pretax-discount+tax, 
-        total_volume = volume,
-        total_weight = weight,
-        total_with_shipping = total_with_shipping)
+        total_discount = discount)
 
 def group_rows(rows,table1,*tables):
     last = None

@@ -28,7 +28,7 @@ def showroom():
 def show_cart(editable=True):
     if not session.cart: return T('Cart empty')
     rows = [TR(qty,
-               A(product.name+ ' '+inventory.detail,
+               A(product.name+ ' '+inventory.detail + ': ',inventory.best_price,
                  _href=URL('showroom',vars=dict(id=product.id))),TD(
                 A(I(_class='icon-plus-sign'),
                   callback=URL('cart/add',
@@ -48,12 +48,7 @@ def show_cart(editable=True):
     rows.append(TR('',T('Total'),CURRENCY+'%.2f' % results['total']))
     rows.append(TR('',T('Discount'),
                    CURRENCY+'%.2f' % results['total_discount']))
-    rows.append(TR('',T('Tax'),CURRENCY+'%.2f' % results['total_tax']))
-    if results['total_with_shipping']:
-        rows.append(TR('',T('Total-Discount+Tax'),
-                       CURRENCY+'%.2f' % results['total_with_tax']))
-        rows.append(TR('',T('Total-Discount+Tax+Shipping'),
-                       CURRENCY+'%.2f' % results['total_with_shipping']))
+    # rows.append(TR('',T('Tax'),CURRENCY+'%.2f' % results['total_tax']))
     return TABLE(*rows)
 
 def cart():
@@ -131,49 +126,46 @@ def checkout():
 
 
 def pay():
-    from gluon.contrib.stripe import StripeForm
+    # from gluon.contrib.stripe import StripeForm
     import random
     results = price_cart()
-    stripe_form = StripeForm(
-        pk=STRIPE_PUBLIC_KEY,
-        sk=STRIPE_SECRET_KEY,
-        amount=int(100*results['total_with_shipping']),
-        description="Nothing")
-    # stripe_form.process()
-    # if stripe_form.accepted:
+    stripe_form = SQLFORM.factory(
+        Field('guest_name','string'),
+        Field('guest_phone','string'),
+
+        )
+    stripe_form.process()
+    if stripe_form.accepted:
     # payment_id = stripe_form.response['id']    
-    payment_id = random.randrange(1,90801) 
-    d = dict(session.checkout_form)
-    d.update({'total':results['total'],
-              'total_discount':results['total_discount'],
-              'total_tax':results['total_tax'],
-              'total_after_tax':results['total_with_tax'],
-              'total_with_shipping':results['total_with_shipping'],
-              'amount_due':results['total_with_shipping'],
-              'amount_paid':results['total_with_shipping'],
-              })
-    order_id = db.cart_order.insert(**d)
-    db.payment.insert(payment_id=payment_id,cart_order=order_id)
-    invoice_id=db.invoice.insert(description="none",order_id = order_id,payment_id=payment_id,amount=results['total_with_tax'])
-    # invoice_id = random.randrange(1,9900)
-    for id,(qty, product, inventory) in session.cart.items():
-        d = dict(                
-            invoice=invoice_id,
-            inventory=inventory,
-            quantity=qty,
-            product=product)
-        d.update(product)
-        d.update(inventory)
-        db.invoice_item.insert(**db.invoice_item._filter_fields(d))
-        # db.invoice_item.insert(invoice=d['invoice'],quantity=d['quantity'],)
-        db.commit()
-    session.cart.clear()
-    session.checkout_form = None
-    session.order_id = order_id
-    redirect(URL('thank_you'))
+        payment_id = random.randrange(1,90801) 
+        d = dict(session.checkout_form)
+        d.update({'total':results['total'],
+                  'total_discount':results['total_discount'],
+                  'amount_due':results['total'],
+                  'amount_paid':results['total'],
+                  })
+        order_id = db.cart_order.insert(**d)
+        db.payment.insert(payment_id=payment_id,cart_order=order_id)
+        invoice_id=db.invoice.insert(description="none",order_id = order_id,payment_id=payment_id,amount=results['total'])
+        # invoice_id = random.randrange(1,9900)
+        for id,(qty, product, inventory) in session.cart.items():
+            d = dict(                
+                invoice=invoice_id,
+                inventory=inventory,
+                quantity=qty,
+                product=product)
+            d.update(product)
+            d.update(inventory)
+            db.invoice_item.insert(**db.invoice_item._filter_fields(d))
+            # db.invoice_item.insert(invoice=d['invoice'],quantity=d['quantity'],)
+            db.commit()
+        session.cart.clear()
+        session.checkout_form = None
+        session.order_id = order_id
+        redirect(URL('thank_you'))
     # elif stripe_form.errors:
         # redirect(URL('pay_error'))
-    return dict(stripe_form=stripe_form,s=session.cart,d=d)
+    return dict(stripe_form=stripe_form,s=session.cart)
 
 
 def ship():

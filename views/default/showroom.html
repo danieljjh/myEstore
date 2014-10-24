@@ -2,6 +2,7 @@
 
 {{for row in rows:}}
 <div class="well">
+{{=rows}}
   <table>
     <tr>
       <td width="200px">
@@ -9,9 +10,10 @@
       </td>
       <td>
 	<h2>{{=row.name}}, ${{=row.unit_price}}</h2>
+	<p>{{=row.inventory}}</p>
 	<form action="{{=URL('cart/add')}}" data-target="#cart">
 	  <div class="input-append">
-	    {{=SELECT(*[OPTION(r.detail,_value=r.id) for r in row.inventory],**dict(_name='id'))}}
+	    {{=SELECT(*[OPTION(r.detail, r.best_price,_value=r.id) for r in row.inventory],**dict(_name='id'))}}
 	    <input type="submit" value="Add to cart"/>
 	  </div>
 	</form>
