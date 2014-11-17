@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang=""{{=T.accepted_language or 'zh-CN'}}"" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="application-name" content="{{=request.application}}" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="google-site-verification" content="" />
+    <title>GrandWay - Fully Responsive & Retina Ready Template</title>
+    <meta content="" name="description">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+    <link rel="shortcut icon" href="{{=URL('static','images/favicon.ico')}}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{=URL('static','images/favicon.png')}}">
+{{
+  # using sidebars need to know what sidebar you want to use
+  left_sidebar_enabled = globals().get('left_sidebar_enabled',False)
+  right_sidebar_enabled = globals().get('right_sidebar_enabled',False)
+  middle_columns = {0:'span12',1:'span9',2:'span6'}[
+  (left_sidebar_enabled and 1 or 0)+(right_sidebar_enabled and 1 or 0)]
+}}
+    <!-- JS FILES -->
+    <script type="text/javascript" src="{{=URL('static','assets/js/jquery-1.20.2.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/jquery-migrate-1.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/modernizr.custom.js')}}"></script>
+    <!-- CSS FILES -->
+    <link href="{{=URL('static','assets/css/style.css')}}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{=URL('static','assets/css/responsive.css')}}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{=URL('static','assets/rs-plugin/css/settings.css')}}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{=URL('static','assets/css/navstylechange.css')}}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{=URL('static','assets/showbizpro/css/settings.css')}}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{=URL('static','assets/showbizpro/fancybox/jquery.fancybox.css')}}" media="screen" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+<!--         <div class="top_line">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 pull-left"><p>Subscribe to be notified for updates: <u>RSS Feed</u></p></div>
+              <div class="col-lg-6 pull-right">
+                  <ul class="social-links">
+                    <li class="facebook"><a href="#"><i class="fa fa-facebook ic_soc"></i></a></li>
+                    <li class="twitter"><a href="#"><i class="fa fa-twitter ic_soc"></i></a></li>
+                    <li class="dribbble"><a href="#"><i class="fa fa-dribbble ic_soc"></i></a></li>
+                    <li class="flickr"><a href="#"><i class="fa fa-flickr ic_soc"></i></a></li>
+                    <li class="github"><a href="#"><i class="fa fa-github ic_soc"></i></a></li>
+                    <li class="instagram"><a href="#"><i class="fa fa-instagram ic_soc"></i></a></li>
+                    <li class="pinterest"><a href="#"><i class="fa fa-pinterest ic_soc"></i></a></li>
+                    <li class="youtube"><a href="#"><i class="fa fa-youtube ic_soc"></i></a></li>
+                    <li class="apple"><a href="#"><i class="fa fa-apple ic_soc"></i></a></li>
+                  </ul>
+              </div> 
+            </div>
+          </div>
+        </div>
+ -->      
+      </header>
+      <div class="page_head">
+        <div class="nav-container " style="height: auto;">
+          <nav>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-3 pull-left"><div class="logo"><a href="index.html"><img src="assets/images/logo.png" alt="" /></a></div></div>
+                <div class="col-lg-9 pull-right">
+                  <div class="menu">
+                    <div id="dl-menu" class="dl-menuwrapper">
+                    <button class="dl-trigger">Open Menu</button>
+                      <ul class="dl-menu">
+                        <li class="current"><a href="#" data-description="Get Started">首页</a>
+
+                        </li>
+                        <li><a href="#" data-description="Theme Basics">鄣吴景区</a>
+                          <ul class="dl-submenu">
+                            <li><a href="about.html">景点</a></li>
+                            <li><a href="services.html">民居</a></li>
+                            <li><a href="contacts.html">活动</a></li>
+                          </ul>
+                        </li>
+<!--                         <li><a href="#" data-description="Our projects">Portfolio</a>
+                          <ul class="dl-submenu">
+                            <li><a href="portfolio_2.html">2 Columns</a></li>
+                            <li><a href="portfolio_3.html">3 Columns</a></li>
+                            <li><a href="portfolio_4.html">4 Columns</a></li>
+                            <li><a href="single_portfolio_half.html">Single Portfolio Half</a></li>
+                            <li><a href="single_portfolio_wide.html">Single Portfolio Wide</a></li>
+                            <li><a href="portfolio_sidebar.html">Portfolio Sidebar</a></li>
+                          </ul>
+                        </li>
+ -->                        
+                        <li><a href="#" data-description="News & Events">最新活动</a>
+<!--                           <ul class="dl-submenu">
+                            <li><a href="blog_large_fullwidth.html">Large Fullwidth</a></li>
+                            <li><a href="blog_large_sidebar.html">Large Sidebar</a></li>
+                            <li><a href="blog_two_columns.html">Two Columns</a></li>
+                            <li><a href="blog_two_columns_sidebar.html">Two Columns Sidebar</a></li>
+                            <li><a href="blog_medium.html">Medium Fullwidth</a></li>
+                            <li><a href="blog_medium_sidebar.html">Medium Sidebar</a></li>
+                            <li><a href="blog_single.html">Single Fullwidth</a></li>
+                          </ul> -->
+                        </li>
+                        <li><a href="#" data-description="Elements">预订</a>
+                          <ul class="dl-submenu">
+                            <li><a href="#">景点门票</a></li>
+                            <li><a href="alerts.html">民居</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="＃" data-description="Buy Now">特产</a></li>
+                      </ul>
+                    </div> 
+                    </div>        
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="welcome">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <section id="main" class="main row">
+          {{if left_sidebar_enabled:}}
+          <div class="span3 left-sidebar">
+            {{block left_sidebar}}
+            <h3>Left Sidebar</h3>
+            <p></p>
+            {{end}}
+          </div>
+          {{pass}}
+
+          <div class="{{=middle_columns}}">
+            {{block center}}
+            {{include}}
+            {{end}}
+          </div>
+
+          {{if right_sidebar_enabled:}}
+          <div class="span3">
+            {{block right_sidebar}}
+            <h3>Right Sidebar</h3>
+            <p></p>
+            {{end}}
+          </div>
+          {{pass}}
+        </section><!--/main-->
+
+      <div class="container marg75">
+        <div class="row">
+
+        </div>
+      </div>
+      <div class="container marg75">
+        <div class="row">
+
+          <div class="col-lg-12">          
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
+      <div class="container marg75">
+
+      </div>
+      <div class="footer">
+        <div class="container ">
+          <div class="row">
+            <div class="col-lg-3 col-md-3"> 
+              <div class="footer-block"><img src="assets/images/logo_foot.png" alt="" class="foot_marg"></div>  
+                <div class="foot-text">Praesent sodales ullamcorper felis, eget rutrum nisi dignissim vel. Nulla non aringin metus, in tincidunt lacus aenean scelerisq cillum dolore eu rugiat nulla pariatur rutru nisi dignissim.</div>
+            </div>
+            <div class="col-lg-3 col-md-3">     
+              <div class="footer-block">Contact info</div>
+                <ul class="contacts images_bg">
+                  <li class="address">Jeremy Martinson 455, California</li>
+                  <li class="phone">Phone:  <a href="#">(507) 996 - 1052</a></li>
+                  <li class="fax">Fax: <a href="#">(509) 128 - 73542</a></li>
+                  <li class="email">E-Mail: <a href="#">example@mail.com</a></li>
+                  <li class="map"><a href="#">Find us on Google Maps</a></li>
+                </ul>
+              </div>
+            <div class="col-lg-3 col-md-3">     
+              <div class="footer-block">Tags</div>
+                <div class="tag_cloud">
+                  <a href="#">HTML 5</a>
+                  <a href="#">CSS 3</a>
+                  <a href="#">WordPress</a>
+                  <a href="#">ThemeForest</a>
+                  <a href="#">PHP</a>
+                  <a href="#">Code</a>
+                  <a href="#">Ajax</a>
+                  <a href="#">JavaScript</a>
+                  <a href="#">PhotoShop</a>
+                  <a href="#">jQuery</a>
+                </div>
+              </div>
+            <div class="col-lg-3 col-md-3">     
+              <div class="footer-block">Flickr Widget</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer_bottom">
+        <div class="container ">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-ms-6 pull-left col-ms-12">     
+              <div class="copyright">Copyright 2014 Dan. Design by <a href="#" target="_blank">Dan</a></div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-ms-6 pull-right col-ms-12">     
+              <div class="foot_menu">
+                <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="portfolio_3.html">Portfolio</a></li>
+                  <li><a href="blog_medium_right.html">The Blog</a></li>
+                  <li><a href="accordion.html">Shortcodes</a></li>
+                  <li><a href="#" target="_blank">Purchase</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="{{=URL('static','assets/rs-plugin/js/jquery.themepunch.plugins.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/rs-plugin/js/jquery.themepunch.revolution.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/showbizpro/js/jquery.themepunch.showbizpro.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/showbizpro/fancybox/jquery.fancybox.pack.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/waypoints.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/sticky.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/jquery.cycle.all.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/retina.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/jquery.dlmenu.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/main.js')}}"></script>
+  </body>
+</html>

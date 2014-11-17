@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang=""{{=T.accepted_language or 'zh-CN'}}"" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="application-name" content="{{=request.application}}" />
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <meta name="google-site-verification" content="" />
+  <title>GrandWay - Fully Responsive & Retina Ready Template</title>
+  <meta content="" name="description">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+  <link rel="shortcut icon" href="{{=URL('static','images/favicon.ico')}}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{=URL('static','images/favicon.png')}}">
+  {{
+  # using sidebars need to know what sidebar you want to use
+  left_sidebar_enabled = globals().get('left_sidebar_enabled',False)
+  right_sidebar_enabled = globals().get('right_sidebar_enabled',True)
+  middle_columns = {0:'span12',1:'span9',2:'span6'}[
+  (left_sidebar_enabled and 1 or 0)+(right_sidebar_enabled and 1 or 0)]
+}}
+<!-- JS FILES -->
+<script type="text/javascript" src="{{=URL('static','assets/js/jquery-1.20.2.min.js')}}"></script>
+<script type="text/javascript" src="{{=URL('static','assets/js/jquery-migrate-1.2.1.min.js')}}"></script>
+<script type="text/javascript" src="{{=URL('static','assets/js/modernizr.custom.js')}}"></script>
+<!-- CSS FILES -->
+<link href="{{=URL('static','assets/css/style.css')}}" media="screen" rel="stylesheet" type="text/css">
+<link href="{{=URL('static','assets/css/responsive.css')}}" media="screen" rel="stylesheet" type="text/css">
+<link href="{{=URL('static','assets/rs-plugin/css/settings.css')}}" media="screen" rel="stylesheet" type="text/css">
+<link href="{{=URL('static','assets/css/navstylechange.css')}}" media="screen" rel="stylesheet" type="text/css">
+<link href="{{=URL('static','assets/showbizpro/css/settings.css')}}" media="screen" rel="stylesheet" type="text/css">
+<link href="{{=URL('static','assets/showbizpro/fancybox/jquery.fancybox.css')}}" media="screen" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="wrapper">
+    <header>
+<!--         
+<div class="top_line">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 pull-left"><p>Subscribe to be notified for updates: <u>RSS Feed</u></p></div>
+              <div class="col-lg-6 pull-right">
+                  <ul class="social-links">
+                    <li class="facebook"><a href="#"><i class="fa fa-facebook ic_soc"></i></a></li>
+                    <li class="twitter"><a href="#"><i class="fa fa-twitter ic_soc"></i></a></li>
+                    <li class="dribbble"><a href="#"><i class="fa fa-dribbble ic_soc"></i></a></li>
+                    <li class="flickr"><a href="#"><i class="fa fa-flickr ic_soc"></i></a></li>
+                    <li class="github"><a href="#"><i class="fa fa-github ic_soc"></i></a></li>
+                    <li class="instagram"><a href="#"><i class="fa fa-instagram ic_soc"></i></a></li>
+                    <li class="pinterest"><a href="#"><i class="fa fa-pinterest ic_soc"></i></a></li>
+                    <li class="youtube"><a href="#"><i class="fa fa-youtube ic_soc"></i></a></li>
+                    <li class="apple"><a href="#"><i class="fa fa-apple ic_soc"></i></a></li>
+                  </ul>
+              </div> 
+            </div>
+          </div>
+        </div>
+      -->      
+    </header>
+    <div class="page_head">
+      <div class="nav-container " style="height: auto;">
+        <nav>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-3 pull-left"><div class="logo"><a href="index.html"><img src="assets/images/logo.png" alt="" /></a></div></div>
+              <div class="col-lg-9 pull-right">
+                <div class="menu">
+                  <div id="dl-menu" class="dl-menuwrapper">
+                    <button class="dl-trigger">Open Menu</button>
+                    <ul class="dl-menu">
+                      <li class="current"><a href="#" data-description="Get Started">首页</a>
+
+                      </li>
+                      <li><a href="#" data-description="Theme Basics">鄣吴景区</a>
+                        <ul class="dl-submenu">
+                          <li><a href="scenes.html">景点</a></li>
+                          <li><a href="services.html">民居</a></li>
+                          <li><a href="contacts.html">活动</a></li>
+                        </ul>
+                      </li>                
+                      <li><a href="#" data-description="News & Events">最新活动</a>
+                      </li>
+                      <li><a href="#" data-description="Elements">预订</a>
+                        <ul class="dl-submenu">
+                          <li><a href="#">景点门票</a></li>
+                          <li><a href="alerts.html">民居</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="＃" data-description="Buy Now">特产</a></li>
+                    </ul>
+                  </div> 
+                </div>        
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>      
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="welcome">
+            <div class="page-name pull-left"><h3>Portfolio 3 Columns Sidebar</h3></div>
+            <div class="page-link pull-right"><a href="#">GrandWay</a> / Portfolio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container marg75">
+      <div class="row">
+        <div class="col-lg-8">
+           {{block center}}
+            {{include}}
+            {{end}}
+
+        </div>
+        <div class="col-lg-4"> 
+            {{block right_sidebar}}
+              <h3>Rs bar</h3>
+            {{end}}
+
+        </div>          
+        <div class="col-lg-12 marg50">      
+
+
+        </div>
+      </div>
+    </div>
+    <div class="twitter_fot marg50">
+      <div class="container ">
+        <div class="row">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="container ">
+        <div class="row">
+          <div class="col-lg-3 col-md-3"> 
+            <div class="footer-block">
+            </div>  
+            <div class="foot-text">
+              <p>鄣吴镇处县城西北部半山区，距县城26公里，距杭长高速公路出口10公里，镇区东南、西北两侧峰峦起伏，中有一水，古名“金鸡岭水”，溪流两岸，古树参天，风景优美，艺术大师吴昌硕曾有诗赞誉：“浮云参野色，斜谷走溪声。”</p></div>
+            </div>
+            <div class="col-lg-3 col-md-3">     
+              <div class="footer-block">联系我们</div>
+              <ul class="contacts images_bg">
+                <li class="address">Jeremy Martinson 455, California</li>
+                <li class="phone">Phone:  <a href="#">(507) 996 - 1052</a></li>
+                <li class="fax">Fax: <a href="#">(509) 128 - 73542</a></li>
+                <li class="email">E-Mail: <a href="#">example@mail.com</a></li>
+                <li class="map"><a href="#">Find us on Google Maps</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-3 col-md-3">     
+              <div class="footer-block">快速导航</div>
+              <div class="tag_cloud">
+                <a href="#">热门景点</a>
+                <a href="#">活动预约</a>
+                <a href="#">民居</a>
+                <a href="#">美食</a>
+                <a href="#">特产</a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3">     
+              <div class="footer-block">相册</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer_bottom">
+        <div class="container ">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-ms-6 pull-left col-ms-12">     
+              <div class="copyright">Copyright 2014 zhangwu. Design by <a href="#" target="_blank">Zhangwu</a></div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-ms-6 pull-right col-ms-12">     
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="{{=URL('static','assets/rs-plugin/js/jquery.themepunch.plugins.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/rs-plugin/js/jquery.themepunch.revolution.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/showbizpro/js/jquery.themepunch.showbizpro.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/showbizpro/fancybox/jquery.fancybox.pack.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/waypoints.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/sticky.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/jquery.cycle.all.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/retina.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/jquery.dlmenu.js')}}"></script>
+    <script type="text/javascript" src="{{=URL('static','assets/js/main.js')}}"></script>
+  </body>
+  </html>

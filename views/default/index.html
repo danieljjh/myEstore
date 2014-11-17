@@ -1,0 +1,116 @@
+{{extend 'templates/grandy1.html'}}
+<div class="container">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="welcome">
+      <div class="page-name pull-left">
+      <h3>
+      	欢迎惠顾 众赢商城 ！
+      </h3>
+      </div>
+      <!-- <div class="page-link pull-right"><a href="#">漳吴</a> </div> -->
+    </div>
+  </div>
+</div>
+</div>
+<!-- <div class="container marg50"> -->
+	<div class="row">
+		<div class="col-lg-9">
+			<div class="portfolioFilter">
+				<ul>
+					<li><a href="#" data-hover="All" data-filter="*" class="current">全部</a></li>
+					{{for t in promo:}}
+					<li><a href="#" data-hover="{{=t}}" data-filter=".{{=t.promo_type}}">{{=t.promo_type}}</a></li>
+<!-- 					<li><a href="#" data-hover="All" data-filter="*" class="current">全部</a></li>
+					<li><a href="#" data-hover="scence" data-filter=".scence">山居</a></li>
+					<li><a href="#" data-hover="facility" data-filter=".facility">湖畔</a></li>
+					<li><a href="#" data-hover="house" data-filter=".house">别墅</a></li>
+					<li><a href="#" data-hover="dinning" data-filter=".dinning">农家</a></li> -->
+					{{pass}}
+				</ul>
+			</div>
+
+			<div class="row marg50"> 
+
+  
+				<div class="showbiz">
+					<div class="portfolio overflowholder" id="aa">
+					{{for h in rows:}}
+						<!-- <div class="port-4 scence"> -->
+						<div class="port-4 {{=h.promo_type}}">
+							<div class="portfolio-block-in">
+								<div class="mediaholder">
+								<a href="{{=URL('default','productdetails',args=[h.id])}}">
+									<div class="mediaholder_innerwrap">
+										<img alt="" src="{{=URL('default/download',h.image)}}">
+										<div class="hovercover" data-maxopacity="0.85">
+											<!-- <a href="#"><div class="linkicon notalone"><i class="fa fa-link"></i></div></a> -->
+											<!-- <a class="fancybox" rel="group2" href="assets/images/11.jpg"><div class="lupeicon notalone"><i class="fa fa-search"></i></div></a> -->
+										</div>
+									</div>
+									</a>
+								</div>
+								<div class="detailholder">
+									<div class="portfolio-name"><a href="{{=URL('default','productdetails',args=[h.id])}}">{{=h.name}}</a></div>
+									<div class="portfolio-text">
+									{{=(h.description_short)}}
+									</div>
+								</div>
+							</div>
+						</div>
+					{{pass}}
+					</div>  
+						
+
+				</div> 
+			</div>  
+		</div>
+		<div class="col-lg-3">
+	
+<!--     <h3 class="title-in"><span>Search</span></h3> 
+	<input type="text" name="s" class="form-control searchform" value=""> -->
+
+				<!-- <button class="btn btn-success">立即预订</button> -->
+			<!--       <ul class="categories">
+			        <li><a href="#">Business</a></li>
+			        <li><a href="#">Entertainment</a></li>
+			        <li><a href="#">News &amp; Politics</a></li>
+			        <li><a href="#">Social Media</a></li>
+			        <li><a href="#">Technology</a></li>
+			      </ul>
+			  -->   
+			  	    <h3 class="title-in">Your cart</h3>
+	    {{=LOAD('default','cart/show',ajax=True,target='cart')}}
+	    {{if request.function=='showroom':}}
+	    <a href="{{=URL('checkout')}}" class="btn btn-primary">Checkout</a>
+	    {{pass}}
+			  <h3 class="title-in"><span>分类</span></h3>  
+
+			  <ul class="categories">
+			   {{=MENU(response.menu, _class='mobile-nav' ,li_class='dropdown',ul_class='categories')}}
+			  </ul>   
+			  <!-- <h3 class="title-in"><span>推荐行程</span></h3>   -->
+			 <!--  <p class="widget_text">Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+			  <h3 class="title-in"><span>更多热点</span></h3>  
+			  <p class="widget_text">Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+ -->
+			  <!-- <p class="widget_text"><img style="width: 100%" src="{{=URL('static','images/photo/9.png')}}“/></p> -->
+				<h3 class="title-in"><span>分享</span></h3>
+				<p>此处放 推荐和分析的工具，二维码扫描分享朋友圈</p>
+
+			  <h3 class="title-in"><span>热点推荐</span></h3> 
+			  <div class="tag_cloud_blog">    
+			<!--   	<a href="#" title="1 topic">Boating</a>
+			  	<a href="#" title="5 topics">Recreation</a>
+			  	<a href="#" title="4 topics">Video</a>
+			  	<a href="#" title="5 topics">Youtube</a>
+			  	<a href="#" title="5 topics">Vimeo</a>
+			  	<a href="#" title="5 topics">Golden</a>
+			  	<a href="#" title="7 topics">China</a>
+			  	<a href="#" title="1 topic">jQuery</a>
+ -->			  </div>
+		</div> <!-- right col -->
+
+	</div>
+</div>
+

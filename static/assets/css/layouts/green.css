@@ -1,0 +1,60 @@
+::selection {background: #1DCE6C;}
+.top_line {background: #1DCE6C !important;} 
+.menu li a:hover {color:#1DCE6C !important;  border-color:#1DCE6C;}
+.menu li.current a {color: #1DCE6C;}
+.menu li:hover a {color: #1DCE6C}
+.menu ul li ul {  border-bottom:1px solid #1DCE6C;}
+.menu ul li ul li a:hover { color:#1DCE6C !important}
+.tp-caption.medium_bg_asbestos {background-color: #1DCE6C; }
+.tp-caption.large_bg_asbestos {background-color: #1DCE6C;}
+.read a {color: #1DCE6C;}
+.portfolio-block {border-bottom: 1px solid #1DCE6C;}
+.showbiz .hovercover {background-color: rgba(0, 208, 104,0.85);}
+.box {border-left: 3px solid #1DCE6C;}
+.btn-purch:hover {border-color: #1DCE6C;color: #1DCE6C;}
+.btn-purch {background-color: #1DCE6C;border-color: #1DCE6C;}
+.openme i {color: #1DCE6C;}
+.blog-name a:hover {color: #1DCE6C;}
+.blog-icons a:hover{color: #1DCE6C;}
+.accordion span.active a {color: #1DCE6C;}
+.accordion span a:hover {color: #1DCE6C;}
+.accordion span.active a:after {border-top: 6px solid #1DCE6C;}
+.twitter_fot {background: #1DCE6C;}
+.tag_cloud a:hover {background: #1DCE6C;border-color: #1DCE6C;}
+.widget_flickr img:hover {border: 2px solid #1DCE6C;}
+@media screen and (max-width: 991px) {
+.dl-menuwrapper button:hover, .dl-menuwrapper button.dl-active, .dl-menuwrapper ul {background: #1DCE6C;}
+.menu ul ul {background: #1DCE6C;}
+.dl-menuwrapper button:after {background: #1DCE6C;box-shadow: 0 10px 0 #1DCE6C, 0 20px 0 #1DCE6C;}
+.menu li.current a {color: #fff;}
+.no-touch .dl-menuwrapper li a:hover {color: #fff !important;}}
+.page-name h3 {color: #1DCE6C;}
+.page-link a {color: #1DCE6C;}
+.about_text a {color: #1DCE6C;}
+.form-control:focus {border-color: #1DCE6C;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(0, 208, 104,0.6);box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(0, 208, 104, 0.6);}
+ul.soc-contacts li a:hover {color: #1DCE6C;}
+.adress_cont a {color: #1DCE6C;}
+.plan.featured .price {color: #1DCE6C;}
+.btn-price {background: #1DCE6C;}
+.btn-price:hover {color: #1DCE6C;border: 1px solid #1DCE6C;}
+.plan.featured h3 {color: #1DCE6C;}
+.clients-s a {color: #1DCE6C;}
+.icon_color {color: #1DCE6C;}
+.adress_cont a {color: #1DCE6C;}
+.oops {color: #1DCE6C;}
+.categories a:hover {color: #1DCE6C;}
+.tag_cloud_blog a:hover {background: #1DCE6C;border-color: #1DCE6C;}
+.portfolioFilter ul li a:hover {background-color: #1DCE6C;}
+.portfolioFilter a.current {background-color: #1DCE6C;}
+.pagin .current {background-color: #1DCE6C;}
+.pagin a:hover {background-color: #1DCE6C;}
+.portfolio-det a {color: #1DCE6C;}
+.meta h2 a:hover {color: #1DCE6C;}
+.meta span a:hover {color: #1DCE6C;}
+ul.social-links-sec-third li a:hover {color: #1DCE6C;}
+.comment-reply-link {color: #1DCE6C;}
+.actives a {color: #1DCE6C !important;}
+.tooltip_s {color: #1DCE6C;}
+.portfolio-block-in {border-bottom: 1px solid #1DCE6C;}
+
+

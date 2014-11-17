@@ -1,4 +1,4 @@
-CURRENCY = '$'
+CURRENCY = '¥'
 INE = IS_NOT_EMPTY()
 
 session.cart = session.cart or {}
@@ -11,38 +11,43 @@ if auth.user: auth.user.is_manager = True
 
 db.define_table(
     'product',
-    Field('category'),
-    Field('name',required=True),
-    Field('description_short','text'),
-    Field('description_long','text'),
-    Field('private_info','text'),
-    Field('unit_price','double'),
-    Field('list_price','double'),
-    Field('on_sale','boolean'),
-    Field('rating','double'),
-    Field('clicks','integer'),
-    Field('image','upload'),
-    Field('delivery',requires=IS_IN_SET(('normal','free','digital'))),
-    Field('media_file','upload'),
-    Field('rating','double'),
-    Field('in_stock','integer'),
-    Field('discount_2x','double',default=0),
-    Field('discount_3x','double',default=0),
-    Field('discount_4x','double',default=0),
+    Field('category',label="分类"),
+    Field('tags',label="标签"),
+    Field('promo_type',requires=IS_IN_SET(('促销','赠品'))),
+    Field('name',required=True,label="产品名称"),
+    Field('description_short','text',label="产品概述"),
+    Field('description_long','text',label="产品详情"),
+    # Field('private_info','text'),
+    # Field('unit_price','double',label="促销价"),
+    # Field('list_price','double',label="原价"),
+    Field('on_sale','boolean',default=True,label="在售"),
+    # Field('rating','double'),
+    # Field('clicks','integer'),
+    Field('image','upload',label="产品主图片"),
+    Field('delivery',requires=IS_IN_SET(('normal','free',)),label="送货方式"),
+    # Field('media_file','upload'),
+    # Field('rating','double'),
+    # Field('in_stock','integer'),
+    Field('discount_2x','double',default=0,label="2件折扣"),
+    # Field('discount_3x','double',default=0),
+    Field('discount_4x','double',default=0,label="4件折扣"),
     format='%(name)s')
 
 db.define_table(
     'inventory',
     Field('product','reference product'),
-    Field('detail'),
+    Field('detail',label="规格"),
     Field('code'),
-    Field('description','text'),
-    Field('quantity','integer'),
+    Field('description','text',label="详情"),
+    Field('quantity','integer',label="库存量"),
+    Field('image','upload',label="产品主图片"),
     Field('qty_on_book','integer'),
     Field('list_price','double'),
     Field('best_price','double'),
-    Field('fire_date','date',required=True),
-    Field('serial_codes','list:string'))
+    # Field('fire_date','date',required=True),
+    # Field('serial_codes','list:string')
+    format='%(detail)s'
+    )
 
 db.define_table(
     'cart_order',
@@ -95,15 +100,13 @@ def price_cart():
         # price = product.unit_price*qty
         price = inventory.best_price*qty
         n, d = qty, 0.0
-        if n and product.discount_4x:
-            d += product.discount_4x*int(n/4)
-            n -= 4*int(n/4) 
-        if n and product.discount_3x:
-            d += product.discount_3x*int(n/3)
-            n -= 3*int(n/3) 
-        if n and product.discount_2x:
-            d += product.discount_2x*int(n/2)
-            n -= 2*int(n/2) 
+        # if n and product.discount_4x:
+        #     d += product.discount_4x*int(n/4)+(inventory.list_price-inventory.best_price)*int(n/4)
+        #     n -= 4*int(n/4) 
+        # if n and product.discount_2x:
+        #     d += product.discount_2x*int(n/2)+(inventory.list_price-inventory.best_price)*int(n/2)
+        #     n -= 2*int(n/2) 
+        d += (inventory.list_price - inventory.best_price) *n
         product.price = price
         total_pretax += price
         discount += d

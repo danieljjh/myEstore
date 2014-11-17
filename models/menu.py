@@ -6,15 +6,15 @@
 #########################################################################
 
 response.logo = A(B(COMPANY_NAME),XML('&trade;&nbsp;'),
-                  _class="brand",_href="http://www.web2py.com/")
+                  _class="brand",_href="#")
 response.title = COMPANY_NAME
 response.subtitle = ''
 
 ## read more at http://dev.w3.org/html5/markup/meta.name.html
-response.meta.author = 'Your Name <you@example.com>'
-response.meta.description = 'a cool new app'
-response.meta.keywords = 'web2py, python, framework'
-response.meta.generator = 'Web2py Web Framework'
+response.meta.author = '众赢商城'
+response.meta.description = '众赢商城'
+response.meta.keywords = '众赢商城'
+response.meta.generator = '众赢商城'
 
 ## your http://google.com/analytics id
 response.google_analytics_id = None
@@ -35,3 +35,4 @@ def make_tree():
     return tree['']
 
 response.menu = cache.ram('categories',lambda:make_tree(),0 if auth.user and auth.user.is_manager else None)
+

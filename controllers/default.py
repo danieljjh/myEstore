@@ -1,12 +1,42 @@
 # -*- coding: utf-8 -*-
 
-@auth.requires_membership('manager')
-def manage_products():
-    grid = SQLFORM.grid(db.product)
-    return locals()
-
 def index():
-    redirect(URL('showroom'))
+    # redirect(URL('showroom'))
+    query = db(db.product.on_sale==True)
+    category =make_tree()
+    promo = query.select(db.product.promo_type,distinct=True)
+    rows = query.select()
+    return dict(rows=rows,category=category,promo=promo)
+
+
+def vendors():
+    pass
+
+def promotions():
+    pass
+
+def aboutus():
+    pass
+
+def freeware():
+    pass
+
+
+def productdetails():
+    if request.args:
+        q = db((db.product.id == request.args[0])
+            & (db.inventory.product == db.product.id)
+            & (db.product.on_sale == True)
+            )
+        rows = q.select()
+        if rows:
+            return dict(rows=rows,d=rows)
+        else:
+            redirect(URL('default','index'))
+    else:
+        redirect(URL('default','index'))
+
+
 
 def showroom():
     category = '/'.join(request.args) if request.args else None
@@ -24,6 +54,33 @@ def showroom():
     rows = db(query).select(orderby=db.product.id|db.inventory.id,limitby=(20*page,20*page+20))
     rows = group_rows(rows,'product','inventory')
     return locals()
+
+# def show_cart(editable=True):
+#     if not session.cart: return T('Cart empty')
+#     rows = [TR(qty,
+#                A(product.name+ ' '+inventory.detail + ': ',inventory.best_price,
+#                  _href=URL('showroom',vars=dict(id=product.id))),TD(
+#                 A(I(_class='icon-plus-sign'),
+#                   callback=URL('cart/add',
+#                                vars=dict(id=inventory.id,editable=editable)),
+#                   target='cart'),
+#                 A(I(_class='icon-minus-sign'),
+#                   callback=URL('cart/del',
+#                                vars=dict(id=inventory.id,editable=editable)),
+#                   target='cart'),
+#                 A(I(_class='icon-remove-sign'),
+#                   callback=URL('cart/clear',
+#                                vars=dict(id=inventory.id,editable=editable)),
+#                   target='cart'))
+#                if editable else '')
+#             for (qty,product,inventory) in session.cart.itervalues()]
+#     results = price_cart()
+#     rows.append(TR('',T('Total'),CURRENCY+'%.2f' % results['total']))
+#     rows.append(TR('',T('Discount'),
+#                    CURRENCY+'%.2f' % results['total_discount']))
+#     # rows.append(TR('',T('Tax'),CURRENCY+'%.2f' % results['total_tax']))
+#     return TABLE(*rows)
+
 
 def show_cart(editable=True):
     if not session.cart: return T('Cart empty')
@@ -69,13 +126,17 @@ def cart():
                     del session.cart[inventory_id]
     return show_cart(request.vars.get('editable','true').lower()!='false')
 
+def cartlist():
+    if not session.cart: return T('Cart empty')
+    return dict(t=price_cart())
+
 def myorders():
     return locals()
 
 def myorder():
     return locals()
 
-@auth.requires_login()
+# @auth.requires_login()
 def checkout():
     if session.checkout_form and not request.post_vars:
         for key in session.checkout_form:

@@ -1,19 +1,18 @@
 {{extend 'layout.html'}}
-
 {{for row in rows:}}
 <div class="well">
-{{=rows}}
+<!-- {{=rows}} -->
   <table>
     <tr>
       <td width="200px">
 	<img src="{{=URL('download',args=row.image)}}" width="200px"/>
       </td>
       <td>
-	<h2>{{=row.name}}, ${{=row.unit_price}}</h2>
-	<p>{{=row.inventory}}</p>
+	<h2>{{=row.name}}</h2>
+	<!-- <p>{{=row.inventory}}</p> -->
 	<form action="{{=URL('cart/add')}}" data-target="#cart">
 	  <div class="input-append">
-	    {{=SELECT(*[OPTION(r.detail, r.best_price,_value=r.id) for r in row.inventory],**dict(_name='id'))}}
+	    {{=SELECT(*[OPTION(r.detail, ' ¥',r.best_price, _value=r.id) for r in row.inventory],**dict(_name='id'))}}
 	    <input type="submit" value="Add to cart"/>
 	  </div>
 	</form>
