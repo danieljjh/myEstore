@@ -51,13 +51,13 @@ db.define_table(
 
 db.define_table(
     'cart_order',
-    Field('guest_name',requires=INE),
-    Field('shipping_address',requires=INE),
-    Field('leaving_city',requires=INE),
+    Field('guest_name',requires=INE,label="收货人姓名"),
+    Field('shipping_address',requires=INE,label="收货地址"),
+    Field('city',requires=INE,label="城市"),
     # Field('shipping_zip',requires=INE),
     # Field('shipping_country',requires=INE),
-    Field('guest_phone'),
-    Field('booking_instructions','text'),
+    Field('guest_phone',label="联系手机"),
+    Field('booking_instructions','text',label="备注"),
     Field('total','double',readable=False,writable=False),
     Field('total_discount','double',readable=False,writable=False),
     Field('amount_due','double',readable=False,writable=False),

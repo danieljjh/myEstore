@@ -1,4 +1,25 @@
-{{extend 'layout.html'}}
+{{extend 'templates/grandy1.html'}}
+<div class="marg25 col-lg-6">
+<h2>购物车</h2>
+<!-- <a href="{{=URL('default','cart',args=['show'])}}"> -->
+{{=LOAD('default','cart/show',vars=dict(editable=request.function!='pay'),ajax=True,target='cart')}}
+<!-- </a> -->
 
-<h2>Checkout</h2>
+
+</div>
+<div class="marg25 col-lg-6">
+	<h2>请填写收货信息</h2>
 {{=form}}
+	
+</div>
+
+<div class="marg25 col-lg-6">
+</div>
+<style>
+tr{
+	line-height: 1.2em;
+}
+td{
+	padding: 6px;
+}
+</style>

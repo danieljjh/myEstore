@@ -31,7 +31,7 @@ def make_tree():
             newkey = '/'.join(keys[:i+1])
             if not newkey in tree:
                 tree[newkey] = subtree = []
-                last.append((keys[i].replace('-',' ').title(),False,URL('showroom',args=keys[:i+1]),subtree))
+                last.append((keys[i].replace('-',' ').title(),False,URL('default','showroom',args=keys[:i+1]),subtree))
     return tree['']
 
 response.menu = cache.ram('categories',lambda:make_tree(),0 if auth.user and auth.user.is_manager else None)

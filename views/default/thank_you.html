@@ -1,5 +1,6 @@
-{{extend 'layout.html'}}
+{{extend 'templates/grandy1.html'}}
 
-<h1>Thank you, your order #{{=session.order_id}} was processed</h1>
-{{=o}}
-{{=BEAUTIFY(response._vars)}}
+<h1>您已成功支付！ 订单 #{{=session.order_id}} 将在 24 小时内发货。</h1>
+
+<h3>您可以用手机号 ＋ 订单号查询订单发货情况。</h3>
+<div class="marg50"></div>

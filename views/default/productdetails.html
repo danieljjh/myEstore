@@ -1,19 +1,7 @@
 {{extend 'templates/grandy1.html'}}
-<div class="container">
-<div class="row">
-  <div class="col-lg-12">
-    <div class="welcome">
-      <div class="page-name pull-left">
-		<h3>{{=rows[0].product.name}}</h3>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 <div class="container marg50">
 	<div class="row">
-		<!-- {{=d}} -->
-		<div class="col-lg-9">
+		<div class="col-lg-8">
 <!-- pic carrousel -->		
 		<script type="text/javascript">
 			var tpj = jQuery;
@@ -76,56 +64,7 @@
 
 							{{pass}}
 						</li>
-			{{pass}}     
-
-<!-- 						<li data-transition="zoomout" data-slotamount="7" data-masterspeed="1000" >
-							<img src="{{=URL('static','images/photo/7.jpg')}}"  alt=""  data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
-
-							<div class="tp-caption lfb customout"
-							data-x="15"
-							data-y="66"
-							data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-							data-speed="800"
-							data-start="800"
-							data-easing="Back.easeOut"
-							data-endspeed="500"
-							data-endeasing="Power4.easeIn"
-							data-captionhidden="on"
-							style="z-index: 11"><img src="assets/images/phone_slide.png">
-							</div>  
-							<div class="tp-caption large_bg_asbestos customin customout"
-							data-x="520"
-							data-y="70"
-							data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
-							data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-							data-speed="500"
-							data-start="1300"
-							data-easing="Power4.easeOut"
-							data-endspeed="500"
-							data-endeasing="Power4.easeIn"
-							data-captionhidden="on"
-							style="z-index: 8">Mobile is the future
-							</div>
-						
-						</li>
-						<li data-transition="boxslide" data-slotamount="7" data-masterspeed="500" >
-							<img src="{{=URL('static','images/photo/9.png')}}"  alt=""  data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
-							<div class="tp-caption large_bg_asbestos customin customout"
-							data-x="15"
-							data-y="70"
-							data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
-							data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-							data-speed="500"
-							data-start="1300"
-							data-easing="Power4.easeOut"
-							data-endspeed="500"
-							data-endeasing="Power4.easeIn"
-							data-captionhidden="on"
-							style="z-index: 8">Best Video Content
-							</div>
-						  
-						</li>
- -->					
+						{{pass}}     
  						{{pass}}
  					</ul>
 				</div>
@@ -136,68 +75,37 @@
 				{{=XML(rows[0].product.description_long)}}
 			</p>
 			<!-- list of rooms -->
-			{{for i in rows:}}
-
-			<div class="clients-s text_cont marg25">
-
-				<div class="row">
-					<div class="col-md-2">
-						<a class="img-hover" href="{{=URL('default','product',args=[i.product.id])}}">
-							<img alt="" src="{{=URL('default/download',i.product.image)}}">
-							<!-- <img alt="" class="img-hover" src="assets/images/hp.png"> -->
-						</a>
-					</div>
-					<div class="col-md-8">
-						<a class="img-hover" href="{{=URL('default','product',args=[i.product.id])}}">
-							<h4>{{=i.inventory.detail}}</h4>
-						</a>
-						<h5>{{=i.inventory.detail}}</h5>
-						<p>{{=XML(i.inventory.description)}}
-						</p>
-					</div>
-					<div class="col-md-2">
-						<h4>{{=i.inventory.best_price}}</h4>
-						<button class="btn btn-success">立即预订</button>
-					</div>
-				</div>
-			</div>
-				{{pass}}
 			<!-- list of rooms end -->
 		</div> <!--end of col left -->
 
-		<div class="col-lg-3">
-		    <h3 class="title-in"><span>分享和推荐</span></h3>
-	    	<p>此处放 推荐和分析的工具，二维码扫描分享朋友圈</p>
-	    	<button class="btn btn-success">立即预订</button>
-		<!--       <ul class="categories">
-		        <li><a href="#">Business</a></li>
-		        <li><a href="#">Entertainment</a></li>
-		        <li><a href="#">News &amp; Politics</a></li>
-		        <li><a href="#">Social Media</a></li>
-		        <li><a href="#">Technology</a></li>
-		      </ul>
-		 -->      
-		    <h3 class="title-in"><span>推荐行程</span></h3>  
-		      <p class="widget_text">Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-		    <h3 class="title-in"><span>更多热点</span></h3>  
-		      <p class="widget_text">Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-
-		      <!-- <p class="widget_text"><img style="width: 100%" src="{{=URL('static','images/photo/9.png')}}“/></p> -->
-
-		    <h3 class="title-in"><span>热点推荐</span></h3> 
-		      <div class="tag_cloud_blog">    
-		        <a href="#" title="1 topic">Boating</a>
-		        <a href="#" title="5 topics">Recreation</a>
-		        <a href="#" title="4 topics">Video</a>
-		        <a href="#" title="5 topics">Youtube</a>
-		        <a href="#" title="5 topics">Vimeo</a>
-		        <a href="#" title="5 topics">Golden</a>
-		        <a href="#" title="7 topics">China</a>
-		        <a href="#" title="1 topic">jQuery</a>
-		      </div>
-
+		<div class="col-lg-4">
+			<div class="row">
+				<form action="{{=URL('cart/add')}}" data-target="#cart">
+				 	<div class="container marg25">
+					<h3>{{=rows[0].product.name}}</h3>
+					<h3>
+				    {{=SELECT(*[OPTION(r.inventory.detail, ' ¥',r.inventory.best_price, _value=r.inventory.id, ) for r in rows],**dict(_name='id'))}}</h3>
+				    <input type="submit" class="btn btn-success" id="addtocart" value="加入购物车"/>
+					</div>
+				</form>
+				<script type="text/javascript">
+					 $('#addtocart').click(function(event){
+				        alert('谢谢惠顾，商品已加入购物车!');
+				        // Do whatever else...
+				    });
+				</script>
+				</div>
+ 
+		      <p class="widget_text"><a href="{{=URL('default','cart',args=['show'])}}">{{=LOAD('default','cart/show',vars=dict(editable=request.function!='pay'),ajax=True,target='cart')}}</a>
+		      </p>
 		</div> <!--end of col right -->
 	</div> <!--end of row -->
 </div>	
 <div class="container marg50">
 </div>
+<script>
+jQuery(function(){
+  jQuery('[data-target]').each(function(){var t=jQuery(this); t.submit(function(){ jQuery.post(t.attr('action'),t.serialize(),function(data){jQuery(t.attr('data-target')).html(data);}); return false; }); });
+  jQuery('.toggable').each(function(){var t=jQuery(this); jQuery('<button class="btn btn-info">More</button>').insertBefore(t).click(function(){t.slideToggle();});});
+});
+</script>

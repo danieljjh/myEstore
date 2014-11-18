@@ -1,17 +1,6 @@
 {{extend 'templates/grandy1.html'}}
 <div class="container">
-<div class="row">
-  <div class="col-lg-12">
-    <div class="welcome">
-      <div class="page-name pull-left">
-      <h3>
-      	欢迎惠顾 众赢商城 ！
-      </h3>
-      </div>
-      <!-- <div class="page-link pull-right"><a href="#">漳吴</a> </div> -->
-    </div>
-  </div>
-</div>
+
 </div>
 <!-- <div class="container marg50"> -->
 	<div class="row">
@@ -37,7 +26,7 @@
 					<div class="portfolio overflowholder" id="aa">
 					{{for h in rows:}}
 						<!-- <div class="port-4 scence"> -->
-						<div class="port-4 {{=h.promo_type}}">
+						<div class="port-3 {{=h.promo_type}}">
 							<div class="portfolio-block-in">
 								<div class="mediaholder">
 								<a href="{{=URL('default','productdetails',args=[h.id])}}">
@@ -79,15 +68,10 @@
 			        <li><a href="#">Technology</a></li>
 			      </ul>
 			  -->   
-			  	    <h3 class="title-in">Your cart</h3>
-	    {{=LOAD('default','cart/show',ajax=True,target='cart')}}
-	    {{if request.function=='showroom':}}
-	    <a href="{{=URL('checkout')}}" class="btn btn-primary">Checkout</a>
-	    {{pass}}
 			  <h3 class="title-in"><span>分类</span></h3>  
 
 			  <ul class="categories">
-			   {{=MENU(response.menu, _class='mobile-nav' ,li_class='dropdown',ul_class='categories')}}
+			   {{=MENU(response.menu, _class='dlmenu' ,li_class='')}}
 			  </ul>   
 			  <!-- <h3 class="title-in"><span>推荐行程</span></h3>   -->
 			 <!--  <p class="widget_text">Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>

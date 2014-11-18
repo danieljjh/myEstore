@@ -1,4 +1,27 @@
-{{extend 'layout.html'}}
-<h1>pay</h1>
-{{=stripe_form}}
-{{=s}}
+{{extend 'templates/grandy1.html'}}
+<div class="col-lg-9">
+<h3>感谢您的惠顾，请核对您的订单信息，确认无误后请付款 </h3>
+{{=form}}
+<h4>您的订单如下：</h4>
+<h4>应付金额 ¥ {{=results['total']}}</h4>
+<h5>
+<ul>
+{{for i in c:}}
+<li>
+	商品：{{=c[i][1].name}}, 
+	规格：{{=c[i][2].detail}},
+	单价：¥{{=c[i][2].best_price}},
+	数量：{{=c[i][0]}}
+</li>
+{{pass}}
+</ul>
+</h5>
+<h4>送货信息</h4>
+<h5>
+收货人：{{=d.guest_name}}</h5>
+<h5>收货地址：{{=d.shipping_address}}</h5>
+<h5>城市： {{=d.city}}</h5>
+<h5>联系手机：{{=d.guest_phone}}</h5>
+<h5>订单备注：{{=d.booking_instructions}}</h5>
+<div class="marg50"></div>
+</div>

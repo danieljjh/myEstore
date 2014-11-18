@@ -14,27 +14,13 @@ def vendors():
     pass
 
 def promotions():
-    query = db((db.product.on_sale==True)
-        & (db.product.promo_type=="促销"))
-    category =make_tree()
-    rows = query.select()
-    response.title = "特价促销 ！"
-    return dict(rows=rows,category=category)
-
+    pass
 
 def aboutus():
-    response.title="上海众赢"
-    return locals()
+    pass
 
 def freeware():
-    query = db((db.product.on_sale==True)
-        & (db.product.promo_type=="赠品"))
-    category =make_tree()
-    # promo = query.select(db.product.promo_type,distinct=True)
-    rows = query.select()
-    response.title = "厂家赠品大派送 ！"
-    return dict(rows=rows,category=category)
-
+    pass
 
 
 def productdetails():
@@ -53,13 +39,33 @@ def productdetails():
         redirect(URL('default','index'))
 
 
+def showroom1():
+    category = '/'.join(request.args) if request.args else None
+    rr = request.raw_args
+    rc = rr.split('/')
+    # response.subtitle = '/'.join(x.replace('-',' ').title() for x in request.args)    
+    response.subtitle = '/'.join(x.replace('-',' ').title() for x in rc)    
+    query = db.product.on_sale==True
+    query &= db.product.id==db.inventory.product
+    page = int(request.vars.get('page',1))-1
+    if request.vars.id:
+        query &= db.product.id == request.vars.id
+    else:
+        if category:
+            query &= db.product.category.startswith(category)
+        if request.vars.q:
+            query &= reduce(lambda a,b:a&b,[db.product.name.contains(k) for k in request.vars.q])
+    rows = db(query).select(orderby=db.product.id|db.inventory.id,limitby=(20*page,20*page+20))
+    rows = group_rows(rows,'product','inventory')
+    return locals()
+
 def showroom():
     category = '/'.join(request.args) if request.args else None
     rr = request.raw_args
     rc = rr.split('/')
     # response.subtitle = '/'.join(x.replace('-',' ').title() for x in request.args)    
     cat = '/'.join(x.replace('-',' ').title() for x in rc)    
-    response.subtitle = '/'.join(x.replace('-',' ').title() for x in rc)
+    response.subtitle = '/'.join(x.replace('-',' ').title() for x in rc)    
     query = db.product.on_sale==True
     query &= db.product.id==db.inventory.product
     page = int(request.vars.get('page',1))-1
@@ -72,7 +78,6 @@ def showroom():
             query &= reduce(lambda a,b:a&b,[db.product.name.contains(k) for k in request.vars.q])
     rows = db(query).select(orderby=db.product.id|db.inventory.id,limitby=(20*page,20*page+20))
     rows = group_rows(rows,'product','inventory')
-    response.title = ""
     return locals()
 
 # def show_cart(editable=True):
@@ -104,47 +109,29 @@ def showroom():
 
 def show_cart(editable=True):
     if not session.cart: return '抢购中'
-    rows = [  DIV(  
-                    DIV(
-                        A(
-                        product.name + ' '+inventory.detail , BR(),' 单价：¥ ',inventory.best_price , ' 数量: ' , qty,
-                        _href=URL('productdetails',args=(product.id)
-                                ),
-                        ),_class="col-md-8"
-                    ),
-                   DIV(
-                        A('+',_class='btn btn-info btn-xs',
-                                callback=URL('cart/add',
-                                   vars=dict(id=inventory.id,editable=editable)
-                                   ),target='cart'
-                        ),_class="col-md-1"
-                    ),
-                    DIV(
-                        A('-', _class="btn btn-warning btn-xs",
-                                callback=URL('cart/del',
-                                   vars=dict(id=inventory.id,editable=editable)
-                                            ),target='cart'
-                        ),_class="col-md-1"
-                    ),
-                    DIV(
-                            A('清除',_class="btn btn-danger btn-xs",
-                      callback=URL('cart/clear',
-                                   vars=dict(id=inventory.id,editable=editable)),target='cart'
-                            ),_class="col-md-1"
-                    )
-                     if editable else ''
-                , _class="col-md-10 h5")
-                    for (qty,product,inventory) in session.cart.itervalues()
-            ]
+    rows = [TR(qty,
+               A(product.name+ ' '+inventory.detail + ': ',inventory.best_price,
+                 _href=URL('showroom',vars=dict(id=product.id))),TD(
+                A(I(_class='icon-plus-sign'),
+                  callback=URL('cart/add',
+                               vars=dict(id=inventory.id,editable=editable)),
+                  target='cart'),
+                A(I(_class='icon-minus-sign'),
+                  callback=URL('cart/del',
+                               vars=dict(id=inventory.id,editable=editable)),
+                  target='cart'),
+                A(I(_class='icon-remove-sign'),
+                  callback=URL('cart/clear',
+                               vars=dict(id=inventory.id,editable=editable)),
+                  target='cart'))
+               if editable else '')
+            for (qty,product,inventory) in session.cart.itervalues()]
     results = price_cart()
-    rows.append(DIV(
-                    T('总金额'),CURRENCY+'%.2f' % results['total'],_class=" col-md-10 h4"
-                ))
-    rows.append(DIV(
-                T('折扣'),CURRENCY+'%.2f' % results['total_discount'],_class=" col-md-10 h4"
-                ))
+    rows.append(TR('',T('Total'),CURRENCY+'%.2f' % results['total']))
+    rows.append(TR('',T('Discount'),
+                   CURRENCY+'%.2f' % results['total_discount']))
     # rows.append(TR('',T('Tax'),CURRENCY+'%.2f' % results['total_tax']))
-    return DIV(*rows,_class="row")
+    return TABLE(*rows)
 
 def cart():
     if request.vars.id and request.vars.id.isdigit():
@@ -165,7 +152,7 @@ def cart():
     return show_cart(request.vars.get('editable','true').lower()!='false')
 
 def cartlist():
-    # if not session.cart: return '抢购中...'
+    if not session.cart: return '抢购中'
     return dict(t=price_cart())
 
 def myorders():
@@ -176,20 +163,14 @@ def myorder():
 
 # @auth.requires_login()
 def checkout():
-    if price_cart()['total'] > 0:
-        response.title="谢谢惠顾，请填写收货信息"
-        if session.checkout_form and not request.post_vars:
-            for key in session.checkout_form:
-                db.cart_order[key].default = session.checkout_form[key]
-        form = SQLFORM(db.cart_order,
-            formstyle='table3cols',
-            ).process(dbio=False)
-        if form.accepted:
-            session.checkout_form = form.vars
-            redirect(URL('pay'))
-        return locals()
-    else:
-        redirect(URL('default','index'))
+    if session.checkout_form and not request.post_vars:
+        for key in session.checkout_form:
+            db.cart_order[key].default = session.checkout_form[key]
+    form = SQLFORM(db.cart_order).process(dbio=False)
+    if form.accepted:
+        session.checkout_form = form.vars
+        redirect(URL('pay'))
+    return locals()
 
 # def pay():
 #     from gluon.contrib.stripe import StripeForm
@@ -234,13 +215,13 @@ def pay():
     # from gluon.contrib.stripe import StripeForm
     import random
     results = price_cart()
-    form = FORM(
-        INPUT(_name="check",_type="checkbox",_id="confirmorder"),
-        LABEL('订单已核对无误'),BR(),
-        INPUT(_type="submit",_value="去支付宝付款",_class="btn btn-success",_id="topay")
+    stripe_form = SQLFORM.factory(
+        Field('guest_name','string'),
+        Field('guest_phone','string'),
+
         )
-    form.process()
-    if form.accepted:
+    stripe_form.process()
+    if stripe_form.accepted:
     # payment_id = stripe_form.response['id']    
         payment_id = random.randrange(1,90801) 
         d = dict(session.checkout_form)
@@ -270,7 +251,7 @@ def pay():
         redirect(URL('thank_you'))
     # elif stripe_form.errors:
         # redirect(URL('pay_error'))
-    return dict(form=form,c=session.cart,results=results,d=session.checkout_form)
+    return dict(stripe_form=stripe_form,s=session.cart)
 
 
 def ship():
