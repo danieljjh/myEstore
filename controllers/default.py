@@ -7,7 +7,8 @@ def index():
     promo = query.select(db.product.promo_type,distinct=True)
     rows = query.select()
     response.title = "欢迎惠顾 众赢商城 ！"
-    return dict(rows=rows,category=category,promo=promo)
+    t = make_tree()
+    return dict(rows=rows,category=category,promo=promo,tree=t)
 
 
 def vendors():
@@ -52,8 +53,30 @@ def productdetails():
     else:
         redirect(URL('default','index'))
 
-
 def showroom():
+    category = '/'.join(request.vars['c']) if request.vars else None
+    rr = request.vars['c']
+    rc = rr.split('-')
+    # response.subtitle = '/'.join(x.replace('-',' ').title() for x in request.args)    
+    cat = '/'.join(x.replace('-',' ').title() for x in rc)    
+    response.subtitle = '/'.join(x.replace('-',' ').title() for x in rc)
+    query = db.product.on_sale==True
+    query &= db.product.id==db.inventory.product
+    page = int(request.vars.get('page',1))-1
+    if request.vars.id:
+        query &= db.product.id == request.vars.id
+    else:
+        if cat:
+            query &= db.product.category.startswith(cat)
+        if request.vars.q:
+            query &= reduce(lambda a,b:a&b,[db.product.name.contains(k) for k in request.vars.q])
+    rows = db(query).select(orderby=db.product.id|db.inventory.id,limitby=(20*page,20*page+20))
+    rows = group_rows(rows,'product','inventory')
+    response.title = ""
+    return locals()
+
+
+def showroom2():
     category = '/'.join(request.args) if request.args else None
     rr = request.raw_args
     rc = rr.split('/')

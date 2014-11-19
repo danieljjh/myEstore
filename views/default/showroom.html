@@ -1,0 +1,61 @@
+{{extend 'templates/grandy1.html'}}
+<div class="container marg50">
+	<div class="row">
+		<div class="col-lg-8">
+				<div class="showbiz">
+					<div class="portfolio overflowholder" id="aa">
+					{{for h in rows:}}
+						<!-- <div class="port-4 scence"> -->
+						<div class="port-3 {{=h.promo_type}}">
+							<div class="portfolio-block-in">
+								<div class="mediaholder">
+								<a href="{{=URL('default','productdetails',args=[h.id])}}">
+									<div class="mediaholder_innerwrap">
+										<img alt="" src="{{=URL('default/download',h.image)}}">
+										<div class="hovercover" data-maxopacity="0.85">
+											<!-- <a href="#"><div class="linkicon notalone"><i class="fa fa-link"></i></div></a> -->
+											<!-- <a class="fancybox" rel="group2" href="assets/images/11.jpg"><div class="lupeicon notalone"><i class="fa fa-search"></i></div></a> -->
+										</div>
+									</div>
+									</a>
+								</div>
+								<div class="detailholder">
+									<div class="portfolio-name"><a href="{{=URL('default','productdetails',args=[h.id])}}">{{=h.name}}</a></div>
+									<div class="portfolio-text">
+									{{=(h.description_short)}}
+									</div>
+								</div>
+							</div>
+						</div>
+					{{pass}}
+					</div>  
+						
+
+				</div> 
+</div> <!-- end of left -->
+		<div class="col-lg-4">
+			<div class="row">
+<!-- 
+				<script type="text/javascript">
+					 $('#addtocart').click(function(event){
+				        alert('谢谢惠顾，商品已加入购物车!');
+				        // Do whatever else...
+				    });
+				</script>
+				</div>
+ 
+		      <p class="widget_text"><a href="{{=URL('default','cart',args=['show'])}}">{{=LOAD('default','cart/show',vars=dict(editable=request.function!='pay'),ajax=True,target='cart')}}</a>
+		      </p> -->
+		      <h4>商品类目</h4>
+			  <ul class="categories">
+			   {{=MENU(response.menu, _class='nav' ,li_class='',ul_class='categories')}}
+			  </ul>     
+		</div> <!--end of col right -->
+</div>
+</div>
+<script>
+jQuery(function(){
+  jQuery('[data-target]').each(function(){var t=jQuery(this); t.submit(function(){ jQuery.post(t.attr('action'),t.serialize(),function(data){jQuery(t.attr('data-target')).html(data);}); return false; }); });
+  jQuery('.toggable').each(function(){var t=jQuery(this); jQuery('<button class="btn btn-info">More</button>').insertBefore(t).click(function(){t.slideToggle();});});
+});
+</script>

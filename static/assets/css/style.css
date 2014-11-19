@@ -854,7 +854,7 @@ cite b { font-weight: 600 }
 .welcome {
     float: left;
     padding-top: 14px;
-    padding-bottom: 25px;
+    padding-bottom: 5px;
     width: 100%;
     border-top: 1px solid #ededed;
     border-bottom: 1px solid #ededed;

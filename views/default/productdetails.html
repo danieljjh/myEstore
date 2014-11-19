@@ -1,7 +1,7 @@
 {{extend 'templates/grandy1.html'}}
 <div class="container marg50">
 	<div class="row">
-		<div class="col-lg-8">
+		<div class="col-lg-7">
 <!-- pic carrousel -->		
 		<script type="text/javascript">
 			var tpj = jQuery;
@@ -9,8 +9,8 @@
 			tpj(document).ready(function() {
 				revapi = tpj('.tp-banner').revolution({
 					delay:4000,
-					startwidth:900,
-					startheight:400,
+					startwidth:400,
+					startheight:600,
 					hideThumbs:10,
 					forceFullWidth:"off",
 				});
@@ -23,8 +23,29 @@
 				<div class="tp-banner" >
 					<ul style="display:none;">
 					{{for i in rows:}}
-						{{if (i.product.image)  :}}
+						{{if (i.inventory.image) :}}
 
+						<li data-transition="fade" data-slotamount="7" data-masterspeed="300" >
+							<img src="{{=URL('default/download',i.inventory.image)}}"  alt=""  data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+							{{if (i.product.description_short) :}}
+							<div class="tp-caption medium_bg_asbestos customin customout"
+							data-x="15"
+							data-y="215"
+							data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
+							data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+							data-speed="500"
+							data-start="1300"
+							data-easing="Power4.easeOut"
+							data-endspeed="500"
+							data-endeasing="Power4.easeIn"
+							data-captionhidden="on"
+							style="z-index: 8">
+								{{=i.product.description_short}}
+							
+							</div>
+								{{pass}}
+						</li>
+						{{else:}}
 						<li data-transition="fade" data-slotamount="7" data-masterspeed="300" >
 							<img src="{{=URL('default/download',i.product.image)}}"  alt=""  data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
 							{{if (i.product.description_short) :}}
@@ -40,32 +61,14 @@
 							data-endeasing="Power4.easeIn"
 							data-captionhidden="on"
 							style="z-index: 8">
-								{{=i.product.description_long}}
+								{{=i.product.description_short}}
 							
 							</div>
-							{{pass}}
-
-							{{else:}}
-							<img src="{{=URL('default/download',rows[0].product.image)}}"  alt=""  data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
-							<div class="tp-caption medium_bg_asbestos customin customout"
-							data-x="15"
-							data-y="215"
-							data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
-							data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-							data-speed="500"
-							data-start="1300"
-							data-easing="Power4.easeOut"
-							data-endspeed="500"
-							data-endeasing="Power4.easeIn"
-							data-captionhidden="on"
-							style="z-index: 8">
-								{{=i.product.description_short}}
-							</div>
-
-							{{pass}}
+								{{pass}}
 						</li>
+
 						{{pass}}     
- 						{{pass}}
+ 					{{pass}}
  					</ul>
 				</div>
 			</div> 
@@ -78,10 +81,10 @@
 			<!-- list of rooms end -->
 		</div> <!--end of col left -->
 
-		<div class="col-lg-4">
+		<div class="col-lg-5">
 			<div class="row">
 				<form action="{{=URL('cart/add')}}" data-target="#cart">
-				 	<div class="container marg25">
+				 	<div class="container marg25 col-lg-10">
 					<h3>{{=rows[0].product.name}}</h3>
 					<h3>
 				    {{=SELECT(*[OPTION(r.inventory.detail, ' ¥',r.inventory.best_price, _value=r.inventory.id, ) for r in rows],**dict(_name='id'))}}</h3>

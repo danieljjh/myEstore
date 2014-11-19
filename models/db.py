@@ -26,3 +26,10 @@ auth.settings.reset_password_requires_verification = True
 ## register with janrain.com, write your domain:api_key in private/janrain.key
 from gluon.contrib.login_methods.rpx_account import use_janrain
 use_janrain(auth, filename='private/janrain.key')
+
+# include ckeditor plug-in
+from plugin_ckeditor import CKEditor
+ckeditor = CKEditor(db)
+ckeditor.define_tables()
+
+ckeditor.settings.url_upload = URL(request.app, 'plugin_ckeditor', 'upload')
