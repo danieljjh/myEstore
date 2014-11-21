@@ -8,7 +8,7 @@ body {
 }
 #wrapper {
     margin: 0 auto;
-    width: 1230px;
+    width: 100%;
     background: #fff;
     box-shadow: 0px 0px 10px #b4b4b4 !important;
     color: #666;
@@ -79,12 +79,12 @@ ul.social-links li a:hover {
     padding-top: 0px;
     background-color: #fff;
 }
-.logo { margin-top: 14px }
+.logo { margin-top: 34px }
 nav {
     position: relative;
-    left: auto;
+    left: 0px;
     z-index: 9999 !important;
-    width: 1230px;
+    width: 100%;
     background: #fff;
 }
 .sticky {
@@ -430,7 +430,7 @@ h2 [class^="iconbox-"], h2 [class*=" iconbox-"] { margin-top: -3px }
     position: relative;
     padding: 10px 10px 15px 10px;
     color: #666;
-    text-align: left;
+    text-align: center;
     font-weight: 300;
     font-size: 13px;
     font-family: 'Open Sans', sans-serif;
@@ -635,7 +635,7 @@ cite b { font-weight: 600 }
 }
 .footer {
     padding-bottom: 15px;
-    /*min-height: 300px;*/
+    min-height: 300px;
     max-height: 100%;
     background: #5E5E5E;
 }
@@ -854,7 +854,7 @@ cite b { font-weight: 600 }
 .welcome {
     float: left;
     padding-top: 14px;
-    padding-bottom: 5px;
+    padding-bottom: 25px;
     width: 100%;
     border-top: 1px solid #ededed;
     border-bottom: 1px solid #ededed;

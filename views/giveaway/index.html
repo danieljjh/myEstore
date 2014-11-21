@@ -1,95 +1,158 @@
 {{extend 'templates/giveaway.html'}}
-<div class="container marg50">
-	<div class="row">
-		<div class="col-lg-12">
-<!-- pic carrousel -->		
-		<script type="text/javascript">
-			var tpj = jQuery;
-			var revapi;
-			tpj(document).ready(function() {
-				revapi = tpj('.tp-banner').revolution({
-					delay:4000,
-					startwidth:400,
-					startheight:600,
-					hideThumbs:10,
-					forceFullWidth:"off",
-				});
-				}); //ready
-		</script>
-		<script type="text/javascript" src="{{=URL('static','assets/rs-plugin/js/jquery.themepunch.plugins.min.js')}}"></script>
-		<script type="text/javascript" src="{{=URL('static','assets/rs-plugin/js/jquery.themepunch.revolution.min.js')}}"></script>
+<style type="text/css">
+	.largeblackbg{
+		background-color: white;
+	}
+	.btn-slider{
+		background-color: #FF7302;
+	}
+</style>
+<script type="text/javascript">
+var revapi;
+jQuery(document).ready(function() {
+     revapi = jQuery('.tp-banner').revolution({
+      delay:9000,
+      // startwidth:1170,
+      // startheight:600,
+      hideThumbs:10,
+      fullWidth:"on",
+      autoHeight:"on",
+    });
+}); //ready
+</script>
+
+<script type="text/javascript" src="{{=URL('static','assets/rs-plugin/js/jquery.themepunch.plugins.min.js')}}"></script>
+<script type="text/javascript" src="{{=URL('static','assets/rs-plugin/js/jquery.themepunch.revolution.min.js')}}"></script>
 		
-			<div class="tp-banner-container" style="">
-				<div class="tp-banner" >
-					<ul style="display:none;">
-					{{for i in rows:}}
-						{{if (i.product_image.image) :}}
+<div class="tp-banner-container" style="">
+	<div class="tp-banner" >
+		<ul style="display:none;">
+			{{for i in rows:}}
+			{{if (i.product_image.image) :}}
 
-						<li data-transition="fade" data-slotamount="7" data-masterspeed="300" >
-							<img src="{{=URL('default/download',i.product_image.image)}}"  alt=""  data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
-							<!-- {{if (i.product_image.button_desc) :}} -->
-							<div class="tp-caption medium_bg_asbestos customin customout"
-							data-x="15"
-							data-y="215"
-							data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
-							data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-							data-speed="500"
-							data-start="1300"
-							data-easing="Power4.easeOut"
-							data-endspeed="500"
-							data-endeasing="Power4.easeIn"
-							data-captionhidden="on"
-							style="z-index: 8">
-								{{=i.product_image.button_desc}}
-							
-							</div>
-								<!-- {{pass}} -->
-						</li>
-						{{else:}}
-						<li data-transition="fade" data-slotamount="7" data-masterspeed="300" >
-							<img src="{{=URL('default/download',i.product.image)}}"  alt=""  data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
-							{{if (i.product.description_short) :}}
-							<div class="tp-caption medium_bg_asbestos customin customout"
-							data-x="15"
-							data-y="215"
-							data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
-							data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
-							data-speed="500"
-							data-start="1300"
-							data-easing="Power4.easeOut"
-							data-endspeed="500"
-							data-endeasing="Power4.easeIn"
-							data-captionhidden="on"
-							style="z-index: 8">
-								{{=i.product.description_short}}
-							
-							</div>
-								{{pass}}
-						</li>
-
-						{{pass}}     
- 					{{pass}}
- 					</ul>
-				</div>
-			</div> 
-
-			<!-- end of carrousel -->
-			<p>
-				{{=XML(rows[0].product.description_long)}}
-			</p>
-			<!-- list of rooms -->
-			<!-- list of rooms end -->
-		</div> <!--end of col left -->
-
-		<div class="col-lg-5">
-			<div class="row">
-				 	<div class="container marg25 col-lg-10">
+			<li data-transition="fade" data-slotamount="7" data-masterspeed="300" >
+				<img src="{{=URL('default/download',i.product_image.image)}}"  alt=""  data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+	              <div class="tp-caption largeblackbg skewfromrightshort"
+	                data-x="12"
+	                data-y="86"
+	                data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+	                data-speed="500"
+	                data-start="800"
+	                data-easing="Back.easeOut"
+	                data-endspeed="500"
+	                data-endeasing="Power4.easeIn"
+	                data-captionhidden="on"
+	                style="z-index: 4">滚动文字 1<br>滚动文字 1
+	              </div>
+	              <div class="tp-caption medium_bg_asbestos customin customout"
+	                data-x="15"
+	                data-y="215"
+	                data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
+	                data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+	                data-speed="500"
+	                data-start="1300"
+	                data-easing="Power4.easeOut"
+	                data-endspeed="500"
+	                data-endeasing="Power4.easeIn"
+	                data-captionhidden="on"
+	                style="z-index: 8">滚动文字 2
+	              </div>
+	              <div class="tp-caption skewfromrightshort customout"
+	                data-x="15"
+	                data-y="280"
+	                data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+	                data-speed="500"
+	                data-start="1750"
+	                data-easing="Back.easeOut"
+	                data-endspeed="500"
+	                data-endeasing="Power4.easeIn"
+	                data-captionhidden="on"
+	                style="z-index: 9">滚动文字 3
+	              </div>
+	              <div class="tp-caption skewfromleftshort customout"
+	                data-x="15"
+	                data-y="350"
+	                data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+	                data-speed="500"
+	                data-start="2000"
+	                data-easing="Back.easeOut"
+	                data-endspeed="500"
+	                data-endeasing="Power4.easeIn"
+	                data-captionhidden="on"
+	                style="z-index: 10"><a class="btn btn-slider" style="background-color: #FF7302; font-size: 2em;border-color:white" href="#">免费领取!</a>
+	              </div>
+	              <div class="tp-caption sfb customout"
+	                data-x="right" data-hoffset="-15"
+	                data-y="0"
+	                data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+	                data-speed="800"
+	                data-start="2100"
+	                data-easing="Back.easeOut"
+	                data-endspeed="500"
+	                data-endeasing="Power4.easeIn"
+	                data-captionhidden="on"
+	                style="z-index: 11"><img src="assets/images/man.png">浮动图片2
+	              </div>
 				
-					</div>
-			</div>
- 
-		</div> <!--end of col right -->
-	</div> <!--end of row -->
-</div>	
-<div class="container marg50">
-</div>
+				
+			</li>
+		{{else:}}
+			<li data-transition="fade" data-slotamount="7" data-masterspeed="300" >
+				<img src="{{=URL('default/download',i.product.image)}}"  alt=""  data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+				{{if (i.product.description_short) :}}
+				<div class="tp-caption medium_bg_asbestos customin customout"
+				data-x="15"
+				data-y="215"
+				data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
+				data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+				data-speed="500"
+				data-start="1300"
+				data-easing="Power4.easeOut"
+				data-endspeed="500"
+				data-endeasing="Power4.easeIn"
+				data-captionhidden="on"
+				style="z-index: 8">
+				{{=i.product.description_short}}
+
+				</div>
+				{{pass}}
+			</li>
+
+			{{pass}}     
+			{{pass}}
+		</ul>
+	</div>
+</div> 
+		
+      <div class="container marg75">
+      	<div class="row">
+      		<div class="col-lg-12 col-md-12 col-ms-12">
+              <p>{{=XML(rows[0].product.description_long)}}</p>
+      		</div>
+      	</div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-xs-4 col-ms-4">      
+            <div class="iconbox"><span class="one"></span><br>
+              <h3>Very Flexible</h3>
+              <p class="read"><a href="#">Read More →</a></p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-xs-4 col-ms-4">     
+            <div class="iconbox"><span class="iconbox-mac"></span><br>
+              <h3>Fully Responsive</h3>
+              <p>Praesent sodales ullamcorper felis, eget rutrum nisi dignissim vel. Nulla non fringilla metus, in tincidunt lacus aenean scelerisque</p>
+              <p class="read"><a href="#">Read More →</a></p>
+            </div>  
+          </div>
+          <div class="col-lg-4 col-md-4 col-xs-4 col-ms-4">    
+            <div class="iconbox"><span class="iconbox-search"></span><br>
+              <h3>Bootstrap 3.1</h3>
+              <p>Praesent sodales ullamcorper felis, eget rutrum nisi dignissim vel. Nulla non fringilla metus, in tincidunt lacus aenean scelerisque</p>
+              <p class="read"><a href="#">Read More →</a></p>
+            </div>  
+          </div>
+        </div>
+      </div>
+
+				
+	
