@@ -37,7 +37,7 @@
     <header> 
     </header>
     <div class="page_head">
-      <div class="nav-container " style="height: auto;">
+<!--       <div class="nav-container " style="height: auto;">
         <nav>
           <div class="container">
             <div class="row">
@@ -53,10 +53,8 @@
                       <li><a href="{{=URL('default', 'promotions')}}" data-description="">热卖商品</a>
                       </li>                
                       </li>
-                      <!-- <li><a href="{{=URL('default', 'vendors')}}">厂家推广</a></li> -->
                       <li><a href="{{=URL('default', 'freeware')}}">厂家活动</a></li>
                       <li><a href="{{=URL('default', 'aboutus')}}">关于我们</a></li>
-                      
                      </ul>
                   </div> 
                 </div>        
@@ -65,6 +63,7 @@
           </div>
         </nav>
       </div>
+ -->    
     </div>
 
       <section id="main" class="main row">
@@ -89,21 +88,7 @@
       </section><!--/main-->
       <!-- <div class="container marg75"> -->
       <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="welcome">
-                <div class="page-name pull-left">
-                <h3>
-                  {{=response.title}}
-                  {{=response.subtitle}}
-                </h3>
-                </div>
-                <div class="page-link pull-right">
-                  <a href="{{=URL('default','checkout')}}">{{=LOAD('default','cartlist',ajax=True,target='cart2')}}</a> 
-                </div>
-              </div>
-            </div>
-          </div>
+
 
           <div class="marg25 ">
 

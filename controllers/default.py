@@ -269,8 +269,8 @@ def pay():
         d = dict(session.checkout_form)
         d.update({'total':results['total'],
                   'total_discount':results['total_discount'],
-                  'amount_due':results['total'],
-                  'amount_paid':results['total'],
+                  'deli_cost':results['total'],
+                  # 'amount_paid':results['total'],
                   })
         order_id = db.cart_order.insert(**d)
         db.payment.insert(payment_id=payment_id,cart_order=order_id)

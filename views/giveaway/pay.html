@@ -1,0 +1,18 @@
+{{extend 'templates/grandy1.html'}}
+<div class="col-lg-9">
+<h3>感谢您的惠顾，请核对您的订单信息，确认无误后请付款 </h3>
+{{=form}}
+<h4>您的订单如下：</h4>
+<h4>应付金额 ¥ {{=dd.total}}</h4>
+<h5>
+{{=dd}}
+</h5>
+<h4>送货信息</h4>
+<h5>
+收货人：{{=dd.guest_name}}</h5>
+<h5>收货地址：{{=dd.shipping_address}}</h5>
+<h5>城市： {{=dd.city}}</h5>
+<h5>联系手机：{{=dd.guest_phone}}</h5>
+<h5>订单备注：{{=dd.booking_instructions}}</h5>
+<div class="marg50"></div>
+</div>

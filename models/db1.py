@@ -33,6 +33,13 @@ db.define_table(
     # Field('discount_4x','double',default=0,label="4件折扣"),
     format='%(name)s')
 
+db.define_table('product_image',
+    Field('product_id',db.product),
+    Field('image','upload'),
+    Field('image_desc','string',label="图片滚动说明"),
+    Field('button_desc','string',label="按钮文字")
+    )
+
 db.define_table(
     'inventory',
     Field('product','reference product'),
@@ -50,16 +57,21 @@ db.define_table(
 
 db.define_table(
     'cart_order',
-    Field('guest_name',requires=INE,label="收货人姓名"),
-    Field('shipping_address',requires=INE,label="收货地址"),
-    Field('city',requires=INE,label="城市"),
+    Field('guest_name',requires=IS_NOT_EMPTY(error_message="请输入姓名"),label="真实姓名",comment="＊ 请输入中文姓名"),
+    Field('guest_phone',label="联系手机",requires=IS_NOT_EMPTY(error_message="请输入手机号"),comment="＊ 用于查询订单"),
+    Field('telphone',label="固定电话",comment="座机号码（例：021-89898989-分机）"),
+    Field('shipping_address','text',requires=IS_NOT_EMPTY(error_message="请输入详细地址"),label="收货地址",comment="＊ 请填写详细地址"),
+    Field('shipping_time',requires=IS_IN_SET(('工作时间','休息时间','不限时段')),default="不限时段",label="收货时段",),
+    Field('city',requires=IS_NOT_EMPTY(error_message="请输入省，城市"),label="省 市"),
+    Field('zipcode',label="邮政编码"),
     # Field('shipping_zip',requires=INE),
     # Field('shipping_country',requires=INE),
-    Field('guest_phone',label="联系手机"),
-    Field('booking_instructions','text',label="备注"),
+    Field('booking_instructions','string',label="备注",comment="其它送货要求"),
     Field('total','double',readable=False,writable=False),
     Field('total_discount','double',readable=False,writable=False),
-    Field('amount_due','double',readable=False,writable=False),
+    Field('deli_cost','double',readable=False,writable=False),
+    Field('g_product','integer',readable=False,writable=False),
+    Field('g_inventory','integer',readable=False,writable=False),
     Field('amount_paid','double',readable=False,writable=False,default=0.0),
     auth.signature)
 

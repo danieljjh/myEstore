@@ -5,7 +5,7 @@ def index():
 
 @auth.requires_membership('manager')
 def products():
-    grid = SQLFORM.smartgrid(db.product,linked_tables=['inventory'],field_id=None,exportclasses=None,csv=False,)
+    grid = SQLFORM.smartgrid(db.product,linked_tables=['inventory','product_image'],field_id=None,exportclasses=None,csv=False,)
     return locals()
 
 @cache.action()

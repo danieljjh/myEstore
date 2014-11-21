@@ -1,0 +1,19 @@
+{{extend 'templates/grandy1.html'}}
+<div class="marg25 col-lg-4">
+<h2>购物车</h2>
+{{=product.name}},{{=total}},{{=inventory_id}},{{=product.id}}
+</div>
+<div class="marg25 col-lg-8">
+	<h2>请填写收货信息</h2>
+{{=form}}
+	
+</div>
+
+<style>
+tr{
+	line-height: 1.2em;
+}
+td{
+	padding: 6px;
+}
+</style>
